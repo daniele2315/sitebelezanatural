@@ -7,7 +7,6 @@
         body {
             margin: 0;
             padding: 0;
-            background: url('https://img.freepik.com/fotos-premium/fundo-rosa-roxo-abstrato-com-flores-e-tintas-na-agua-pano-de-fundo-para-produtos-cosmeticos-de-perfume_154092-18775.jpg') no-repeat center center fixed;
             background-size: cover;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
@@ -17,7 +16,7 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background-color: rgba(179, 19, 117, 0.614);
+            background-color: rgba(214, 83, 164, 0.42);
             padding: 40px;
             border-radius: 12px;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
