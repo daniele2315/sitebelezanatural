@@ -1,16 +1,16 @@
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Beleza Natural - Cosméticos</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
+    /* Estilos Gerais */
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      background-color: #fff0f5;
+      background: #fff0f5;
       color: #333;
     }
     header {
@@ -22,37 +22,99 @@
       align-items: center;
       position: sticky;
       top: 0;
-      z-index: 100;
+      z-index: 1000;
     }
     .logo {
       font-size: 1.8em;
-      font-weight: bold;
       display: flex;
       align-items: center;
-      color: white;
     }
     .logo img {
       width: 40px;
       height: 40px;
       margin-right: 10px;
     }
-    .logo span {
-      font-family: 'Brush Script MT', cursive;
-      font-size: 1.5em;
+    nav {
+      background: #ffe6f2;
+      padding: 10px;
+      text-align: center;
+      position: sticky;
+      top: 80px;
+      z-index: 999;
     }
+    nav a {
+      margin: 0 15px;
+      color: #800080;
+      font-weight: bold;
+      text-decoration: none;
+      font-size: 1.1em;
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: #ba55d3;
+    }
+    section {
+      padding: 40px 20px;
+      display: none;
+      animation: fadeIn 1s;
+    }
+    #inicio {
+      background: #f5fff5;
+      display: block;
+    }
+    .produtos {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+    .produto {
+      background: white;
+      border: 2px solid #ba55d3;
+      border-radius: 10px;
+      padding: 15px;
+      text-align: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .produto:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+    .produto img {
+      max-width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 5px;
+    }
+    .nome {
+      margin: 10px 0 5px;
+      font-weight: bold;
+      color: #800080;
+    }
+    .preco {
+      color: #008000;
+      font-size: 1.1em;
+    }
+    .add-carrinho {
+      background: #ff69b4;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      margin-top: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    /* Carrinho */
     .carrinho {
       position: relative;
       cursor: pointer;
-      font-size: 1.8em;
-      background-color: #ff69b4;
+      background: #ff69b4;
       color: white;
       padding: 10px;
       border-radius: 50%;
+      font-size: 1.8em;
       box-shadow: 0 4px 6px rgba(0,0,0,0.2);
-      transition: background-color 0.3s;
-    }
-    .carrinho:hover {
-      background-color: #ff4f84;
     }
     .carrinho-itens {
       display: none;
@@ -67,7 +129,7 @@
       box-shadow: 0 4px 8px rgba(0,0,0,0.2);
       border-radius: 8px;
       overflow-y: auto;
-      z-index: 99;
+      z-index: 999;
     }
     .carrinho-itens ul {
       list-style: none;
@@ -78,88 +140,26 @@
       margin-bottom: 10px;
       font-size: 0.9em;
       color: #800080;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
     .carrinho-itens .total {
       font-size: 1.2em;
-      font-weight: bold;
       margin-top: 10px;
       color: #008000;
+      font-weight: bold;
     }
     .finalizar-btn {
       background: #32cd32;
       color: white;
-      padding: 10px;
       border: none;
       width: 100%;
-      border-radius: 5px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-    nav {
-      background-color: #ffe6f2;
       padding: 10px;
-      text-align: center;
-      position: sticky;
-      top: 80px;
-      z-index: 99;
-    }
-    nav a {
-      margin: 0 15px;
-      color: #800080;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 1.1em;
-    }
-    nav a:hover {
-      text-decoration: underline;
-    }
-    section {
-      padding: 40px 20px;
-    }
-    #inicio {
-      background-color: #f5fff5;
-    }
-    .produtos {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 20px;
-    }
-    .produto {
-      background: white;
-      border: 2px solid #ba55d3;
-      border-radius: 10px;
-      padding: 15px;
-      text-align: center;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      transition: transform 0.3s;
-    }
-    .produto:hover {
-      transform: scale(1.05);
-    }
-    .produto img {
-      max-width: 100%;
-      height: 150px;
-      object-fit: cover;
       border-radius: 5px;
-    }
-    .nome {
-      font-weight: bold;
-      margin: 10px 0 5px;
-      color: #800080;
-    }
-    .preco {
-      color: #008000;
-      font-size: 1.1em;
-    }
-    .add-carrinho {
-      background: #ff69b4;
-      color: white;
-      border: none;
-      padding: 8px;
       margin-top: 10px;
-      border-radius: 5px;
-      cursor: pointer;
       font-weight: bold;
+      cursor: pointer;
     }
     footer {
       background: #ba55d3;
@@ -174,179 +174,189 @@
       margin: 0 10px;
       text-decoration: none;
     }
+    /* Busca de Produtos */
+    .busca {
+      margin: 20px 0;
+      text-align: center;
+    }
+    .busca input {
+      padding: 8px;
+      width: 80%;
+      max-width: 400px;
+      border-radius: 5px;
+      border: 2px solid #ba55d3;
+    }
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
     @media (max-width: 768px) {
       header {
         flex-direction: column;
-        text-align: center;
       }
       nav {
-        text-align: center;
+        top: 140px;
       }
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <div class="logo">
-      <img src="https://img.icons8.com/ios/452/flower.png" alt="Logo Flores">
-      <span>Beleza Natural</span>
-    </div>
-    <div class="carrinho" onclick="toggleCarrinho()">
-      <i class="fas fa-shopping-cart"></i>
-    </div>
-  </header>
+<header>
+  <div class="logo">
+    <img src="https://img.icons8.com/ios/452/flower.png" alt="Logo">
+    <span>Beleza Natural</span>
+  </div>
+  <div class="carrinho" onclick="toggleCarrinho()">
+    <i class="fas fa-shopping-cart"></i>
+  </div>
+</header>
 
-  <div class="carrinho-itens" id="carrinho-itens">
-    <ul id="lista-carrinho"></ul>
-    <div class="total" id="total-carrinho">Total: R$ 0,00</div>
-    <button class="finalizar-btn" onclick="finalizarCompra()">Finalizar Compra</button>
+<div class="carrinho-itens" id="carrinho-itens">
+  <ul id="lista-carrinho"></ul>
+  <div class="total" id="total-carrinho">Total: R$ 0,00</div>
+  <button class="finalizar-btn" onclick="finalizarCompra()">Finalizar Compra</button>
+</div>
+
+<nav>
+  <a href="javascript:void(0)" onclick="mostrarAba('inicio')">Início</a>
+  <a href="javascript:void(0)" onclick="mostrarAba('sobre')">Sobre Nós</a>
+  <a href="javascript:void(0)" onclick="mostrarAba('contato')">Contato</a>
+</nav>
+
+<section id="inicio">
+  <h2 style="text-align:center; color:#800080;">🌸 Nossos Produtos</h2>
+  
+  <div class="busca">
+    <input type="text" id="inputBusca" placeholder="Buscar produto..." onkeyup="buscarProduto()">
   </div>
 
-  <nav>
-    <a href="#inicio">Início</a>
-    <a href="#sobre">Sobre Nós</a>
-    <a href="#contato">Contato</a>
-  </nav>
+  <div class="produtos" id="lista-produtos">
+    <!-- Produtos vão aqui pelo JS -->
+  </div>
+</section>
 
-  <section id="inicio">
-    <h2 style="text-align:center; color:#800080;">🌸 Nossos Produtos</h2>
-    <div class="produtos">
-      <div class="produto">
-        <img src="https://img.freepik.com/fotos-premium/batom-rosa-isolado-no-fundo-branco_41158-5902.jpg" alt="Batom Rosa Chic">
-        <div class="nome">Batom Rosa Chic</div>
-        <div class="preco">R$ 39,90</div>
-        <button class="add-carrinho" onclick="adicionarCarrinho('Batom Rosa Chic', 39.90)">Adicionar ao Carrinho</button>
-      </div>
-      <div class="produto">
-        <img src="https://img.freepik.com/fotos-gratis/frasco-de-perfume-rosa-isolado-no-fundo-branco_53876-63307.jpg" alt="Perfume Floral">
-        <div class="nome">Perfume Floral</div>
-        <div class="preco">R$ 79,90</div>
-        <button class="add-carrinho" onclick="adicionarCarrinho('Perfume Floral', 79.90)">Adicionar ao Carrinho</button>
-      </div>
-        <!-- Produto 3 -->
-    <div class="produto"><img src="https://via.placeholder.com/200x150?text=Produto+3" alt="Produto 3"><div class="nome">Paleta Brilho Natural</div><div class="preco">R$ 89,00</div></div>
+<section id="sobre">
+  <h2 style="text-align:center; color:#800080;">💜 Sobre Nós</h2>
+  <p style="text-align:center; max-width:800px; margin:auto;">Na Beleza Natural, acreditamos na força da beleza autêntica. Trabalhamos com cosméticos de alta qualidade para realçar o que você tem de melhor. Nossa missão é oferecer produtos que cuidam de sua pele, cabelo e autoestima!</p>
+</section>
 
-    <!-- Produto 4 -->
-    <div class="produto"><img src="https://via.placeholder.com/200x150?text=Produto+4" alt="Produto 4"><div class="nome">Base Líquida Rosé</div><div class="preco">R$ 44,90</div></div>
+<section id="contato">
+  <h2 style="text-align:center; color:#800080;">📞 Contato</h2>
+  <p style="text-align:center;">Entre em contato pelas nossas redes sociais:</p>
+  <ul style="list-style:none; text-align:center; padding:0;">
+    <li><i class="fab fa-instagram"></i> <a href="https://www.instagram.com/belezanatural_oficial" target="_blank">@belezanatural_oficial</a></li>
+    <li><i class="fab fa-whatsapp"></i> <a href="https://wa.me/5591999999999" target="_blank">(91) 99999-9999</a></li>
+  </ul>
+</section>
 
-    <!-- Produto 5 -->
-    <div class="produto"><img src="https://via.placeholder.com/200x150?text=Produto+5" alt="Produto 5"><div class="nome">Creme Facial Verde Calmante</div><div class="preco">R$ 32,50</div></div>
+<footer>
+  <p>&copy; 2025 Beleza Natural. Todos os direitos reservados.</p>
+  <div class="social-icons">
+    <a href="https://www.instagram.com/belezanatural_oficial" target="_blank"><i class="fab fa-instagram"></i></a>
+    <a href="https://wa.me/5591999999999" target="_blank"><i class="fab fa-whatsapp"></i></a>
+  </div>
+</footer>
 
-    <!-- Produto 6 -->
-    <div class="produto"><img src="https://via.placeholder.com/200x150?text=Produto+6" alt="Produto 6"><div class="nome">Iluminador Estelar</div><div class="preco">R$ 55,00</div></div>
+<script>
+  const produtos = [
+    { nome: "Batom Rosa Chic", preco: 39.90, imagem: "https://img.freepik.com/fotos-premium/batom-rosa-isolado-no-fundo-branco_41158-5902.jpg" },
+    { nome: "Perfume Floral", preco: 79.90, imagem: "https://m.media-amazon.com/images/I/71sxgVUNhvL._AC_UF350,350_QL80_.jpg" },
+    { nome: "Paleta Brilho Natural", preco: 89.00, imagem: "https://via.placeholder.com/200x150?text=Produto+3" },
+    { nome: "Base Líquida Rosé", preco: 44.90, imagem: "https://via.placeholder.com/200x150?text=Produto+4" },
+    { nome: "Creme Facial Verde Calmante", preco: 32.50, imagem: "https://via.placeholder.com/200x150?text=Produto+5" },
+    { nome: "Iluminador Estelar", preco: 55.00, imagem: "https://via.placeholder.com/200x150?text=Produto+6" },
+    { nome: "Delineador Roxo Elétrico", preco: 29.90, imagem: "https://via.placeholder.com/200x150?text=Produto+7" },
+    { nome: "Sérum Rosa Glow", preco: 69.90, imagem: "https://via.placeholder.com/200x150?text=Produto+8" },
+    { nome: "Sabonete Facial Verde Fresh", preco: 19.90, imagem: "https://via.placeholder.com/200x150?text=Produto+9" },
+    { nome: "Blush Rosado Natural", preco: 24.90, imagem: "https://via.placeholder.com/200x150?text=Produto+10" },
+    { nome: "Creme Mãos Lavanda", preco: 14.90, imagem: "https://via.placeholder.com/200x150?text=Produto+11" },
+    { nome: "Pó Compacto Rosé", preco: 38.00, imagem: "https://via.placeholder.com/200x150?text=Produto+12" },
+    { nome: "Kit Máscara + Esfoliante", preco: 79.90, imagem: "https://via.placeholder.com/200x150?text=Produto+13" },
+    { nome: "Loção Tônica Purificante", preco: 26.90, imagem: "https://via.placeholder.com/200x150?text=Produto+14" },
+    { nome: "Gloss Labial Roxo", preco: 21.90, imagem: "https://via.placeholder.com/200x150?text=Produto+15" },
+    { nome: "Óleo de Rosa Mosqueta", preco: 45.00, imagem: "https://via.placeholder.com/200x150?text=Produto+16" },
+    { nome: "Creme de Pentear Verde", preco: 28.90, imagem: "https://via.placeholder.com/200x150?text=Produto+17" },
+    { nome: "Fixador de Maquiagem", preco: 35.90, imagem: "https://via.placeholder.com/200x150?text=Produto+18" },
+    { nome: "Perfume Rosado Intenso", preco: 99.90, imagem: "https://via.placeholder.com/200x150?text=Produto+19" },
+    { nome: "Hidratante Corporal Floral", preco: 33.30, imagem: "https://via.placeholder.com/200x150?text=Produto+20" }
+  ];
 
-    <!-- Produto 7 -->
-    <div class="produto"><img src="https://via.placeholder.com/200x150?text=Produto+7" alt="Produto 7"><div class="nome">Delineador Roxo Elétrico</div><div class="preco">R$ 29,90</div></div>
+  let carrinho = [];
 
-    <!-- Produto 8 -->
-    <div class="produto"><img src="https://via.placeholder.com/200x150?text=Produto+8" alt="Produto 8"><div class="nome">Sérum Rosa Glow</div><div class="preco">R$ 69,90</div></div>
+  function toggleCarrinho() {
+    const carrinhoItens = document.getElementById('carrinho-itens');
+    carrinhoItens.style.display = carrinhoItens.style.display === 'block' ? 'none' : 'block';
+  }
 
-    <!-- Produto 9 -->
-    <div class="produto"><img src="https://via.placeholder.com/200x150?text=Produto+9" alt="Produto 9"><div class="nome">Sabonete Facial Verde Fresh</div><div class="preco">R$ 19,90</div></div>
-
-    <!-- Produto 10 -->
-    <div class="produto"><img src="https://via.placeholder.com/200x150?text=Produto+10" alt="Produto 10"><div class="nome">Blush Rosado Natural</div><div class="preco">R$ 24,90</div></div>
-
-    <!-- Produto 11 -->
-    <div class="produto"><img src="https://via.placeholder.com/200x150?text=Produto+11" alt="Produto 11"><div class="nome">Creme Mãos Lavanda</div><div class="preco">R$ 14,90</div></div>
-
-    <!-- Produto 12 -->
-    <div class="produto"><img src="https://via.placeholder.com/200x150?text=Produto+12" alt="Produto 12"><div class="nome">Pó Compacto Rosé</div><div class="preco">R$ 38,00</div></div>
-
-    <!-- Produto 13 -->
-    <div class="produto"><img src="https://via.placeholder.com/200x150?text=Produto+13" alt="Produto 13"><div class="nome">Kit Máscara + Esfoliante</div><div class="preco">R$ 79,90</div></div>
-
-    <!-- Produto 14 -->
-    <div class="produto"><img src="https://via.placeholder.com/200x150?text=Produto+14" alt="Produto 14"><div class="nome">Loção Tônica Purificante</div><div class="preco">R$ 26,90</div></div>
-
-    <!-- Produto 15 -->
-    <div class="produto"><img src="https://via.placeholder.com/200x150?text=Produto+15" alt="Produto 15"><div class="nome">Gloss Labial Roxo</div><div class="preco">R$ 21,90</div></div>
-
-    <!-- Produto 16 -->
-    <div class="produto"><img src="https://via.placeholder.com/200x150?text=Produto+16" alt="Produto 16"><div class="nome">Óleo de Rosa Mosqueta</div><div class="preco">R$ 45,00</div></div>
-
-    <!-- Produto 17 -->
-    <div class="produto"><img src="https://via.placeholder.com/200x150?text=Produto+17" alt="Produto 17"><div class="nome">Creme de Pentear Verde</div><div class="preco">R$ 28,90</div></div>
-
-    <!-- Produto 18 -->
-    <div class="produto"><img src="https://via.placeholder.com/200x150?text=Produto+18" alt="Produto 18"><div class="nome">Fixador de Maquiagem</div><div class="preco">R$ 35,90</div></div>
-
-    <!-- Produto 19 -->
-    <div class="produto"><img src="https://via.placeholder.com/200x150?text=Produto+19" alt="Produto 19"><div class="nome">Perfume Rosado Intenso</div><div class="preco">R$ 99,90</div></div>
-
-    <!-- Produto 20 -->
-    <div class="produto"><img src="https://via.placeholder.com/200x150?text=Produto+20" alt="Produto 20"><div class="nome">Hidratante Corporal Floral</div><div class="preco">R$ 33,30</div></div>
-
-    </div>
-  </section>
-
-  <section id="sobre">
-    <h2 style="text-align:center; color:#800080;">💜 Sobre Nós</h2>
-    <p style="text-align:center; max-width:800px; margin:auto;">Na Beleza Natural, acreditamos na força da beleza autêntica. Trabalhamos com cosméticos de alta qualidade para realçar o que você tem de melhor. Nossa missão é oferecer produtos que cuidam de sua pele, cabelo e autoestima!</p>
-  </section>
-
-  <section id="contato">
-    <h2 style="text-align:center; color:#800080;">📞 Contato</h2>
-    <p style="text-align:center;">Entre em contato pelas nossas redes sociais:</p>
-    <ul style="list-style:none; text-align:center; padding:0;">
-      <li><i class="fab fa-instagram"></i> <a href="https://www.instagram.com/belezanatural_oficial" target="_blank">@belezanatural_oficial</a></li>
-      <li><i class="fab fa-whatsapp"></i> <a href="https://wa.me/5591999999999" target="_blank">(91) 99999-9999</a></li>
-    </ul>
-  </section>
-
-  <footer>
-    <p>&copy; 2025 Beleza Natural. Todos os direitos reservados.</p>
-    <div class="social-icons">
-      <a href="https://www.instagram.com/belezanatural_oficial" target="_blank"><i class="fab fa-instagram"></i></a>
-      <a href="https://wa.me/5591999999999" target="_blank"><i class="fab fa-whatsapp"></i></a>
-    </div>
-  </footer>
-
-  <script>
-    let carrinho = [];
-
-    function toggleCarrinho() {
-      const carrinhoItens = document.getElementById('carrinho-itens');
-      carrinhoItens.style.display = carrinhoItens.style.display === 'block' ? 'none' : 'block';
+  function adicionarCarrinho(nome, preco) {
+    const item = carrinho.find(p => p.nome === nome);
+    if (item) {
+      item.quantidade++;
+    } else {
+      carrinho.push({ nome, preco, quantidade: 1 });
     }
+    atualizarCarrinho();
+  }
 
-    function adicionarCarrinho(nome, preco) {
-      const item = { nome, preco, quantidade: 1 };
-      const existe = carrinho.find(produto => produto.nome === nome);
-      if (existe) {
-        existe.quantidade += 1;
-      } else {
-        carrinho.push(item);
-      }
+  function atualizarCarrinho() {
+    const lista = document.getElementById('lista-carrinho');
+    lista.innerHTML = '';
+    let total = 0;
+    carrinho.forEach(item => {
+      total += item.preco * item.quantidade;
+      const li = document.createElement('li');
+      li.innerHTML = `${item.nome} (${item.quantidade}) <button onclick="removerItem('${item.nome}')">❌</button>`;
+      lista.appendChild(li);
+    });
+    document.getElementById('total-carrinho').textContent = `Total: R$ ${total.toFixed(2)}`;
+  }
+
+  function removerItem(nome) {
+    carrinho = carrinho.filter(item => item.nome !== nome);
+    atualizarCarrinho();
+  }
+
+  function finalizarCompra() {
+    if (carrinho.length > 0) {
+      alert('Compra finalizada com sucesso! Obrigado!');
+      carrinho = [];
       atualizarCarrinho();
+      toggleCarrinho();
+    } else {
+      alert('Seu carrinho está vazio!');
     }
+  }
 
-    function atualizarCarrinho() {
-      const listaCarrinho = document.getElementById('lista-carrinho');
-      listaCarrinho.innerHTML = '';
-      let total = 0;
-      carrinho.forEach(item => {
-        const li = document.createElement('li');
-        li.innerHTML = `${item.nome} - ${item.quantidade} x R$ ${item.preco.toFixed(2)}`;
-        listaCarrinho.appendChild(li);
-        total += item.preco * item.quantidade;
-      });
-      document.getElementById('total-carrinho').textContent = `Total: R$ ${total.toFixed(2)}`;
-    }
+  function mostrarAba(id) {
+    document.querySelectorAll('section').forEach(sec => sec.style.display = 'none');
+    document.getElementById(id).style.display = 'block';
+  }
 
-    function finalizarCompra() {
-      if (carrinho.length === 0) {
-        alert('Seu carrinho está vazio!');
-      } else {
-        alert('Compra finalizada com sucesso! Obrigado por comprar na Beleza Natural!');
-        carrinho = [];
-        atualizarCarrinho();
-        document.getElementById('carrinho-itens').style.display = 'none';
-      }
-    }
-  </script>
+  function buscarProduto() {
+    const busca = document.getElementById('inputBusca').value.toLowerCase();
+    const produtosFiltrados = produtos.filter(p => p.nome.toLowerCase().includes(busca));
+    renderizarProdutos(produtosFiltrados);
+  }
+
+  function renderizarProdutos(lista) {
+    const container = document.getElementById('lista-produtos');
+    container.innerHTML = '';
+    lista.forEach(prod => {
+      container.innerHTML += `
+        <div class="produto">
+          <img src="${prod.imagem}" alt="${prod.nome}">
+          <div class="nome">${prod.nome}</div>
+          <div class="preco">R$ ${prod.preco.toFixed(2)}</div>
+          <button class="add-carrinho" onclick="adicionarCarrinho('${prod.nome}', ${prod.preco})">Adicionar ao Carrinho</button>
+        </div>
+      `;
+    });
+  }
+
+  // Inicializa
+  renderizarProdutos(produtos);
+</script>
 
 </body>
 </html>
-
