@@ -13,40 +13,47 @@
       color: #333;
     }
     header {
-      background: linear-gradient(to right, #ba55d3, #32cd32, #ff69b4);
+     background: linear-gradient(to right, #ba55d3, #32cd32, #ff69b4);
       color: white;
-      padding: 20px;
+      padding: 5px 15px; /* Diminuí o padding do cabeçalho */
       display: flex;
       justify-content: space-between;
       align-items: center;
       position: sticky;
       top: 0;
       z-index: 1000;
-    }
-    .logo {
-      font-size: 1.8em;
-      display: flex;
-      align-items: center;
+}
+
+.logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5em; /* Diminui o tamanho da fonte */
+      font-weight: bold;
+      color: white;
+      .logo img {
+      width: 40px;
+      height: 40px;
+      margin-right: 10px;
     }
     .logo img {
       width: 40px;
       height: 40px;
       margin-right: 10px;
     }
+    }
     nav {
-      background: #ffe6f2;
-      padding: 10px;
+     background: #ffe6f2;
+      padding: 5px 10px; /* Reduzi o padding */
       text-align: center;
       position: sticky;
       top: 80px;
       z-index: 999;
     }
     nav a {
-      margin: 0 15px;
+      margin: 0 10px; /* Diminui a margem entre os itens */
       color: #800080;
       font-weight: bold;
       text-decoration: none;
-      font-size: 1.1em;
+      font-size: 0.9em; /* Reduzi o tamanho da fonte */
       transition: color 0.3s;
     }
     nav a:hover {
@@ -105,29 +112,31 @@
       font-weight: bold;
     }
     .carrinho {
-      position: relative;
-      cursor: pointer;
+        position: fixed; /* Mudei para 'fixed' para fixar o carrinho na tela */
+      top: 10px;
+      right: 10px;
       background: #ff69b4;
       color: white;
       padding: 10px;
       border-radius: 50%;
       font-size: 1.8em;
       box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+      cursor: pointer;
+      z-index: 1500; /* Garantir que o carrinho tenha z-index maior */
     }
     .carrinho-itens {
-      display: none;
-      position: absolute;
+        position: fixed; /* Mudando para 'fixed' para sobrepor */
+      top: 10%; /* Distância do topo */
       right: 0;
-      top: 60px;
-      background: white;
-      border: 2px solid #ba55d3;
-      padding: 15px;
       width: 300px;
-      max-height: 400px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      background: rgba(255, 255, 255, 0.9); /* Fundo translúcido */
+      padding: 15px;
       border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      z-index: 1500; /* Garante que o carrinho se sobreponha ao conteúdo */
+      display: none;
+      max-height: 80vh;
       overflow-y: auto;
-      z-index: 999;
     }
     .carrinho-itens ul {
       list-style: none;
@@ -242,8 +251,8 @@
 
 <header>
   <div class="logo">
-    <img src="https://img.icons8.com/ios/452/flower.png" alt="Logo">
-    <span>Beleza Natural</span>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <div class="logo">BN</div>
   </div>
   <div class="carrinho" onclick="toggleCarrinho()">
     <i class="fas fa-shopping-cart"></i>
@@ -337,77 +346,86 @@
   { nome: "Hidratante Corporal Floral", preco: 33.30, imagem: "https://via.placeholder.com/200x150?text=Produto+20" }
 ];
 
-  const listaCarrinho = document.getElementById('lista-carrinho');
-  const totalCarrinho = document.getElementById('total-carrinho');
-  const listaProdutosDiv = document.getElementById('lista-produtos');
-
-  function adicionarProdutoCarrinho(produto) {
-    carrinho.push(produto);
-    renderizarCarrinho();
+function mostrarProdutos() {
+    const container = document.getElementById('lista-produtos');
+    listaProdutos.forEach(produto => {
+      const divProduto = document.createElement('div');
+      divProduto.classList.add('produto');
+      divProduto.innerHTML = `
+        <img src="${produto.imagem}" alt="${produto.nome}">
+        <div class="nome">${produto.nome}</div>
+        <div class="preco">R$ ${produto.preco.toFixed(2)}</div>
+        <button class="add-carrinho" onclick="adicionarCarrinho('${produto.nome}', ${produto.preco})">Adicionar ao Carrinho</button>
+      `;
+      container.appendChild(divProduto);
+    });
+  }
+ // Função para adicionar produtos ao carrinho
+ function adicionarCarrinho(nome, preco) {
+    carrinho.push({ nome, preco });
+    atualizarCarrinho()
   }
 
-  function renderizarCarrinho() {
+  // Função para atualizar o carrinho
+  function atualizarCarrinho() {
+    const listaCarrinho = document.getElementById('lista-carrinho');
     listaCarrinho.innerHTML = '';
     let total = 0;
     carrinho.forEach(item => {
-      let li = document.createElement('li');
-      li.textContent = `${item.nome} - R$ ${item.preco.toFixed(2)}`;
+      const li = document.createElement('li');
+      li.innerHTML = `${item.nome} - R$ ${item.preco.toFixed(2)}`;
       listaCarrinho.appendChild(li);
       total += item.preco;
     });
-    totalCarrinho.textContent = `Total: R$ ${total.toFixed(2)}`;
+    document.getElementById('total-carrinho').innerHTML = `Total: R$ ${total.toFixed(2)}`;
   }
 
+  // Função para alternar a visibilidade do carrinho
   function toggleCarrinho() {
     const carrinhoItens = document.getElementById('carrinho-itens');
     carrinhoItens.style.display = carrinhoItens.style.display === 'block' ? 'none' : 'block';
   }
 
-  function mostrarAba(aba) {
-    const secoes = document.querySelectorAll('section');
-    secoes.forEach(secao => secao.style.display = 'none');
-    document.getElementById(aba).style.display = 'block';
-  }
-
-  function buscarProduto() {
-    const busca = document.getElementById('inputBusca').value.toLowerCase();
-    const produtosFiltrados = listaProdutos.filter(produto => produto.nome.toLowerCase().includes(busca));
-    renderizarProdutos(produtosFiltrados);
-  }
-
-  function renderizarProdutos(produtos) {
-    listaProdutosDiv.innerHTML = '';
-    produtos.forEach(produto => {
-      let div = document.createElement('div');
-      div.classList.add('produto');
-      div.innerHTML = `
-        <img src="${produto.imagem}" alt="${produto.nome}">
-        <div class="nome">${produto.nome}</div>
-        <div class="preco">R$ ${produto.preco.toFixed(2)}</div>
-        <button class="add-carrinho" onclick="adicionarProdutoCarrinho(${JSON.stringify(produto)})">Adicionar ao Carrinho</button>
-      `;
-      listaProdutosDiv.appendChild(div);
-    });
-  }
-
   function finalizarCompra() {
-    const loginForm = document.getElementById('login-form');
-    loginForm.style.display = 'flex'; // Exibe o formulário de login
+  if (carrinho.length === 0) {
+    alert("Seu carrinho está vazio!");
+    return;
   }
 
-  function validarLogin() {
-    const usuario = document.getElementById('usuario').value;
-    const senha = document.getElementById('senha').value;
+  // Mostra o formulário de login
+  document.getElementById('login-form').style.display = 'flex';
+}
 
-    if (usuario && senha) {
-      alert('Login bem-sucedido! Agora você pode finalizar a compra.');
-      document.getElementById('login-form').style.display = 'none'; // Esconde o formulário de login
-    } else {
-      alert('Por favor, insira seu usuário e senha.');
-    }
+ alert("Compra finalizada com sucesso!");
+  alert("Compra finalizada com sucesso!");
+  carrinho = [];
+  atualizarCarrinho();
+  toggleCarrinho(); // fecha o carrinho após a compra
+
+function validarLogin() {
+  const usuario = document.getElementById('usuario').value;
+  const senha = document.getElementById('senha').value;
+
+  // Verificação simples (você pode melhorar com autenticação real)
+  if (usuario && senha === '123') {
+    alert('Login realizado com sucesso!');
+
+    // Fecha o formulário de login
+    document.getElementById('login-form').style.display = 'none';
+
+    // Finaliza a compra
+    alert("Compra finalizada com sucesso!");
+    carrinho = [];
+    atualizarCarrinho();
+    toggleCarrinho(); // Fecha o carrinho
+  } else {
+    alert('Usuário ou senha incorretos!');
   }
+}
 
-  renderizarProdutos(listaProdutos);
+
+  // Exibir os produtos ao carregar a página
+  mostrarProdutos();
 </script>
 
 </body>
