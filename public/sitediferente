@@ -1,3 +1,4 @@
+]
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -15,7 +16,7 @@
     header {
      background: linear-gradient(to right, #ba55d3, #32cd32, #ff69b4);
       color: white;
-      padding: 5px 15px; /* Diminuí o padding do cabeçalho */
+      padding: 5px 15px; 
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -301,7 +302,7 @@
   <div class="opiniao"><strong>Fernanda L.:</strong> "Minha pele melhorou muito com o creme que comprei, estou apaixonada!"</div>
 </section>
 
-<!-- Login Modal -->
+
 <div class="login-form" id="login-form">
   <div class="login-container">
     <h2>Login</h2>
@@ -325,25 +326,25 @@
   const listaProdutos = [
   { nome: 'Perfume Floral', preco: 69.90, imagem: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpVjvJkkCDmpnl6jQYhjjoP6mQhWbE36TUkw&s' },
   { nome: 'Creme Hidratante', preco: 49.90, imagem: 'https://creamy.vtexassets.com/arquivos/ids/157070/01.jpg?v=638446358897930000' },
-  { nome: 'Batons Matte', preco: 39.90, imagem: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAZipSXVRCxK5ZGXIQHe16VDWDR8TAgBoDww&s' },
-  { nome: "Paleta Brilho Natural", preco: 89.00, imagem: "https://dailus.vteximg.com.br/arquivos/ids/165158/7894222031132_1.png?v=637916073560270000" },
+  { nome: 'Batons Matte', preco: 39.90, imagem: 'https://res.cloudinary.com/beleza-na-web/image/upload/w_1500,f_auto,fl_progressive,q_auto:best/v1/imagens/products/B81626/Make-B_BT_Mate_Ros-Fab_B81626.jpg' },
+  { nome: "Paleta Brilho Natural", preco: 89.00, imagem: "https://th.bing.com/th/id/OIP.g0WRXXMcUzeoW08AksClCAHaHa?cb=iwp2&rs=1&pid=ImgDetMain" },
   { nome: "Base Líquida Rosé", preco: 44.90, imagem: "https://www.kimake.com.br/image/cache/data/eftr/Img_ftr_rp_1242802-580x580.JPG?version=20241213145344" },
-  { nome: "Creme Facial ", preco: 32.50, imagem: "https://oceane.vtexassets.com/arquivos/ids/205068-800-800?v=638355817588930000&width=800&height=800&aspect=true" },
+  { nome: "Creme Facial ", preco: 32.50, imagem:"https://th.bing.com/th/id/OIP.bBXtxaoQLt_fCyJ_bk0QbQHaEq?cb=iwp2&rs=1&pid=ImgDetMain" },
   { nome: "Iluminador ", preco: 55.00, imagem: "https://www.perfumariasumire.com.br/media/catalog/product/2/6/268932.jpg?optimize=medium&bg-color=255,255,255&fit=bounds&height=563&width=553&canvas=553:563" },
   { nome: "Delineador Roxo ", preco: 29.90, imagem: "https://down-br.img.susercontent.com/file/f92bfdaf261fdc231cf740650c614b24" },
   { nome: "Sérum Rosa ", preco: 69.90, imagem: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9_rYxSEVtAGAyXrK3A1NncEcM8HJlDbwBGw&s" },
   { nome: "Sabonete Facial  ", preco: 19.90, imagem: "https://io.convertiez.com.br/m/ciganabeleza/shop/products/images/11078/medium/sabonete-facial-dermachem-acido-salicilico-100ml-52374_19709.jpg" },
-  { nome: "Blush Rosado", preco: 24.90, imagem: "https://oceane.vtexassets.com/arquivos/ids/205676/AP2001173C0306F_blush_em_bastao_rosa_pink_oceane_edition_1.jpg?v=638793698944630000" },
+  { nome: "Blush Rosado", preco: 24.90, imagem: "https://th.bing.com/th/id/OIP.Bv_H2AhaRIsffzeUSpusDAAAAA?cb=iwp2&rs=1&pid=ImgDetMains" },
   { nome: "Creme de mãos Lavanda", preco: 14.90, imagem: "https://images.tcdn.com.br/img/img_prod/721009/creme_hidratante_para_as_maos_lavanda_60g_perfumes_do_jardim_919_1_83bb87d024b88353ce57c6d771fae7d2.jpg" },
   { nome: "Pó Compacto", preco: 38.00, imagem: "https://images.tcdn.com.br/img/img_prod/169691/po_compacto_fps_20_ultra_fino_2587_1_671aa9cb3ca246cd22e3325830ad330b_20250218085056.jpg" },
   { nome: "Esfoliante de morango", preco: 79.90, imagem: "https://cdn.awsli.com.br/600x700/1538/1538399/produto/259670640f00e7aeb7d.jpg" },
-  { nome: "Loção Tônica Purificante", preco: 26.90, imagem: "https://via.placeholder.com/200x150?text=Produto+14" },
-  { nome: "Gloss Labial Roxo", preco: 21.90, imagem: "https://via.placeholder.com/200x150?text=Produto+15" },
-  { nome: "Óleo de Rosa Mosqueta", preco: 45.00, imagem: "https://via.placeholder.com/200x150?text=Produto+16" },
-  { nome: "Creme de Pentear Verde", preco: 28.90, imagem: "https://via.placeholder.com/200x150?text=Produto+17" },
-  { nome: "Fixador de Maquiagem", preco: 35.90, imagem: "https://via.placeholder.com/200x150?text=Produto+18" },
-  { nome: "Perfume Rosado Intenso", preco: 99.90, imagem: "https://via.placeholder.com/200x150?text=Produto+19" },
-  { nome: "Hidratante Corporal Floral", preco: 33.30, imagem: "https://via.placeholder.com/200x150?text=Produto+20" }
+  { nome: "Loção Tônica", preco: 26.90, imagem: "https://th.bing.com/th/id/OIP.utEPDEpBHOcCj5tGrCtCygHaHa?cb=iwp2&rs=1&pid=ImgDetMain" },
+  { nome: "Gloss Labial Roxo", preco: 21.90, imagem: "https://www.bing.com/th?id=OPHS.aRoDQPF%2bC4uwjA474C474&o=5&pid=21.1&w=148&h=260&qlt=100&dpr=1,5&bw=6&bc=FFFFFF" },
+  { nome: "Óleo de Rosa Mosqueta", preco: 45.00, imagem: "https://th.bing.com/th/id/OIP.iPzKRORd7AawsDkPCgHtFQHaHa?w=203&h=203&c=7&r=0&o=7&cb=iwp2&dpr=1.5&pid=1.7&rm=3" },
+  { nome: "Corretivo", preco: 28.90, imagem: "https://th.bing.com/th/id/OIP.2s3cRgAa3H_Jcd1DHlcUrQHaHa?w=176&h=180&c=7&r=0&o=7&cb=iwp2&dpr=1.5&pid=1.7&rm=3" },
+  { nome: "Fixador de Maquiagem", preco: 35.90, imagem: "https://th.bing.com/th/id/OIP.xO3mIMCoFGbDyVPqK_SDKAHaHa?cb=iwp2&rs=1&pid=ImgDetMain" },
+  { nome: "Perfume Rosado Intenso", preco: 99.90, imagem: "https://th.bing.com/th/id/OIP.fOSmQ5sCzByYZ0ihp_sdzAAAAA?cb=iwp2&rs=1&pid=ImgDetMain" },
+  { nome: "Hidratante Corporal ", preco: 33.30, imagem: "https://th.bing.com/th/id/OIP.SLHc6BWCTsFrciGd9hyl9gHaHa?cb=iwp2&rs=1&pid=ImgDetMain" }
 ];
 
 function mostrarProdutos() {
